@@ -95,11 +95,11 @@ class UserService(
     }
 
     private fun minorVersion(user: User): User {
-        return user.copy(version = user.version?.minus(1))
+        return user.copy(version = user.version.minus(1))
     }
 
     private fun biggerVersion(user: User): User {
-        return user.copy(version = user.version?.plus(1))
+        return user.copy(version = user.version.plus(1))
     }
 
     private fun equalVersion(user: User): User {

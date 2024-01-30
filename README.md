@@ -9,34 +9,34 @@ POC Skipe Version
 ```
 =====VERSION TEST BEGINS=====
 
-newUser = User(id=null, name=Gabriel Teste 123, email=teste@email.com, version=null)
-userPersisted = User(id=22, name=Gabriel Teste 123, email=teste@email.com, version=0)
+newUser = User(id=null, name=Gabriel Teste 123, email=teste@email.com, version=1)
+userPersisted = User(id=24, name=Gabriel Teste 123, email=teste@email.com, version=1)
 
-userMinorVersion = User(id=22, name=Gabriel Teste 123, email=teste@email.com, version=-1)
+userMinorVersion = User(id=24, name=Gabriel Teste 123, email=teste@email.com, version=0)
 [userMinorVersionError] Error: org.springframework.orm.ObjectOptimisticLockingFailureException
-[userMinorVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#22]
+[userMinorVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#24]
 
-userBiggerVersion = User(id=22, name=Gabriel Teste 123, email=teste@email.com, version=1)
+userBiggerVersion = User(id=24, name=Gabriel Teste 123, email=teste@email.com, version=2)
 [userBiggerVersionError] Error: org.springframework.orm.ObjectOptimisticLockingFailureException
-[userBiggerVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#22]
+[userBiggerVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#24]
 
-userEqualVersion = User(id=22, name=Gabriel Teste 123, email=teste@email.com, version=0)
-newUserEqualVersion = User(id=22, name=Gabriel Teste 123, email=teste@email.com, version=0) saved
+userEqualVersion = User(id=24, name=Gabriel Teste 123, email=teste@email.com, version=1)
+newUserEqualVersion = User(id=24, name=Gabriel Teste 123, email=teste@email.com, version=1) saved
 
-userAfterTest = User(id=22, name=Gabriel Teste 123, email=teste@email.com, version=0)
-newVersion = User(id=22, name=Gabriel Teste 123, email=new-teste@email.com, version=1)
+userAfterTest = User(id=24, name=Gabriel Teste 123, email=teste@email.com, version=1)
+newVersion = User(id=24, name=Gabriel Teste 123, email=new-teste@email.com, version=2)
 
-NEW VERSION TEST BEGINS
-userMinorVersion = User(id=22, name=Gabriel Teste 123, email=new-teste@email.com, version=0)
+=====NEW VERSION TEST BEGINS=====
+userMinorVersion = User(id=24, name=Gabriel Teste 123, email=new-teste@email.com, version=1)
 [userMinorVersionError] Error: org.springframework.orm.ObjectOptimisticLockingFailureException
-[userMinorVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#22]
+[userMinorVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#24]
 
-userBiggerVersion = User(id=22, name=Gabriel Teste 123, email=new-teste@email.com, version=2)
+userBiggerVersion = User(id=24, name=Gabriel Teste 123, email=new-teste@email.com, version=3)
 [userBiggerVersionError] Error: org.springframework.orm.ObjectOptimisticLockingFailureException
-[userBiggerVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#22]
+[userBiggerVersionError] Message: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [br.com.gabrieldragone.spikedataversion.entity.User#24]
 
-userEqualVersion = User(id=22, name=Gabriel Teste 123, email=new-teste@email.com, version=1)
-newUserEqualVersion = User(id=22, name=Gabriel Teste 123, email=new-teste@email.com, version=1) saved
+userEqualVersion = User(id=24, name=Gabriel Teste 123, email=new-teste@email.com, version=2)
+newUserEqualVersion = User(id=24, name=Gabriel Teste 123, email=new-teste@email.com, version=2) saved
 
 
 =====VERSION TEST END=====
