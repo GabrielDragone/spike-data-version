@@ -36,6 +36,7 @@ class UserService(
         println("userAfterTest = $userAfterTest")
 
         userAfterTest.email = "new-${userAfterTest.email}"
+        //userAfterTest.version = 10L
         val newVersion = userRepository.save(userAfterTest)
         println("newVersion = $newVersion")
         println()

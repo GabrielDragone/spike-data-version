@@ -14,5 +14,5 @@ data class User (
     var email: String,
 
     @Version
-    val version: Long = 1
+    var version: Long = 1
 )
