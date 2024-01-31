@@ -5,6 +5,8 @@ POC Skipe Version
 * Criei a tabela users na [V000001__create_table_users.sql](src%2Fmain%2Fresources%2Fdb%2Fmigration%2FV000001__create_table_users.sql), perceba que não tem o version.
 * Ao adicionar o @Version na Entity, o sistema reclamou que não tinha a coluna version na tabela users. Tive que criar na [V000002__alter_table_users_add_column_version.sql](src%2Fmain%2Fresources%2Fdb%2Fmigration%2FV000002__alter_table_users_add_column_version.sql), isso ocorreu porque estamos usando o Flyway.
 * A aplicação irá rodar sozinha a [UserService.kt](src%2Fmain%2Fkotlin%2Fbr%2Fcom%2Fgabrieldragone%2Fspikedataversion%2Fservice%2FUserService.kt), pois ela está implementando a CommandLineRunner que executa toda vez que a aplicação sobe.
+* O registro só é salvo quando a versão é igual a do banco, caso contrário, é lançado uma exceção.
+* Mesmo se forçarmos a versão, o registro não é salvo, pois a versão do banco é maior ou menor, dependendo da forma como for forçada.
 * Segue o log da aplicação:
 ```
 =====VERSION TEST BEGINS=====

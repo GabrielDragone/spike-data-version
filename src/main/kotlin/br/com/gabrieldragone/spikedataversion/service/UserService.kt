@@ -20,10 +20,10 @@ class UserService(
             name = "Gabriel Teste 123",
             email = "teste@email.com"
         )
-        println("newUser = $newUser")
+        println("[newUser] Object: $newUser")
 
         val userPersisted = userRepository.save(newUser)
-        println("userPersisted = $userPersisted")
+        println("[userPersisted] Object: $userPersisted")
 
         println()
 
@@ -33,12 +33,12 @@ class UserService(
         persistAll(userPersisted)
 
         val userAfterTest = userRepository.findById(userPersisted.id!!).get()
-        println("userAfterTest = $userAfterTest")
+        println("[userAfterTest] Object: $userAfterTest")
 
         userAfterTest.email = "new-${userAfterTest.email}"
         //userAfterTest.version = 10L
         val newVersion = userRepository.save(userAfterTest)
-        println("newVersion = $newVersion")
+        println("[newVersion] Object: $newVersion")
         println()
 
         println("=====NEW VERSION TEST BEGINS=====")
@@ -59,12 +59,12 @@ class UserService(
     private fun persistMinorVersion(userPersisted: User) {
         try {
             val userMinorVersion = minorVersion(userPersisted)
-            println("userMinorVersion = $userMinorVersion")
+            println("[userMinorVersion] Object: $userMinorVersion")
             userRepository.save(userMinorVersion)
-            println("Saved userMinorVersion")
+            println("[userMinorVersion] Saved userMinorVersion")
         } catch (e: Exception) {
-            println("[userMinorVersionError] Error: ${e.javaClass.name}")
-            println("[userMinorVersionError] Message: ${e.message}")
+            println("[userMinorVersion] Error: ${e.javaClass.name}")
+            println("[userMinorVersion] Message: ${e.message}")
         }
         println()
     }
@@ -72,12 +72,12 @@ class UserService(
     private fun persistBiggerVersion(userPersisted: User) {
         try {
             val userBiggerVersion = biggerVersion(userPersisted)
-            println("userBiggerVersion = $userBiggerVersion")
+            println("[userBiggerVersion] Object: $userBiggerVersion")
             userRepository.save(userBiggerVersion)
-            println("Saved userBiggerVersion")
+            println("[userBiggerVersion] Saved userBiggerVersion")
         } catch (e: Exception) {
-            println("[userBiggerVersionError] Error: ${e.javaClass.name}")
-            println("[userBiggerVersionError] Message: ${e.message}")
+            println("[userBiggerVersion] Error: ${e.javaClass.name}")
+            println("[userBiggerVersion] Message: ${e.message}")
         }
         println()
     }
@@ -85,12 +85,12 @@ class UserService(
     private fun persistEqualVersion(userPersisted: User) {
         try {
             val userEqualVersion = equalVersion(userPersisted)
-            println("userEqualVersion = $userEqualVersion")
+            println("[userEqualVersion] Object: $userEqualVersion")
             val newUserEqualVersion = userRepository.save(userEqualVersion)
-            println("newUserEqualVersion = $newUserEqualVersion saved")
+            println("[userEqualVersion] newUserEqualVersion: $newUserEqualVersion saved")
         } catch (e: Exception) {
-            println("[userEqualVersionError] Error: ${e.javaClass.name}")
-            println("[userEqualVersionError] Message: ${e.message}")
+            println("[userEqualVersion] Error: ${e.javaClass.name}")
+            println("[userEqualVersion] Message: ${e.message}")
         }
         println()
     }
