@@ -9,14 +9,12 @@ import java.time.LocalDateTime
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "[users]")
-data class User (
+data class UserWithoutVersion (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
     val name: String,
-
-    var email: String,
 
     @CreatedDate
     var createdAt: LocalDateTime? = null,
@@ -24,8 +22,6 @@ data class User (
     @LastModifiedDate
     var updatedAt: LocalDateTime? = null,
 
-    @Version
-    var version: Long? = 1,
+    var email: String
 
-
-    )
+)

@@ -1,2 +1,2 @@
 ALTER TABLE "users"
-ADD COLUMN version bigserial;
+ADD COLUMN version BIGINT DEFAULT 1;

@@ -1,13 +1,16 @@
 package br.com.gabrieldragone.spikedataversion.service
 
 import br.com.gabrieldragone.spikedataversion.entity.User
+import br.com.gabrieldragone.spikedataversion.entity.UserWithoutVersion
 import br.com.gabrieldragone.spikedataversion.repository.UserRepository
+import br.com.gabrieldragone.spikedataversion.repository.UserWithoutVersionRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val userWithoutVersionRepository: UserWithoutVersionRepository
 ): CommandLineRunner {
 
     override fun run(vararg args: String?) {
@@ -36,14 +39,22 @@ class UserService(
         println("[userAfterTest] Object: $userAfterTest")
 
         userAfterTest.email = "new-${userAfterTest.email}"
-        //userAfterTest.version = 10L
-        val newVersion = userRepository.save(userAfterTest)
+//        userAfterTest.version = null
+//        val newVersion = userRepository.save(userAfterTest)
+        var userWithoutVersion = UserWithoutVersion(
+            id = userAfterTest.id,
+            name = userAfterTest.name,
+            email = userAfterTest.email,
+            createdAt = userAfterTest.createdAt,
+            updatedAt = userAfterTest.updatedAt
+        )
+        val newVersion = userWithoutVersionRepository.save(userWithoutVersion)
         println("[newVersion] Object: $newVersion")
         println()
 
-        println("=====NEW VERSION TEST BEGINS=====")
-
-        persistAll(newVersion)
+//        println("=====NEW VERSION TEST BEGINS=====")
+//
+//        persistAll(newVersion)
 
         println()
         println("=====VERSION TEST END=====")
@@ -96,11 +107,11 @@ class UserService(
     }
 
     private fun minorVersion(user: User): User {
-        return user.copy(version = user.version.minus(1))
+        return user.copy(version = user.version!!.minus(1))
     }
 
     private fun biggerVersion(user: User): User {
-        return user.copy(version = user.version.plus(1))
+        return user.copy(version = user.version!!.plus(1))
     }
 
     private fun equalVersion(user: User): User {

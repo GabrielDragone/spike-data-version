@@ -3,3 +3,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/ms-spike
     username: postgres
     password: banco123
+# Logging configuration:
+#logging:
+#  level:
+#    br.com.gabrieldragone: DEBUG
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type: TRACE
+#        orm:
+#          jdbc:
+#            bind: TRACE
